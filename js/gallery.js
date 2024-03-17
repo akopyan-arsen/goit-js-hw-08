@@ -84,13 +84,13 @@ const markup = images
 gallery.insertAdjacentHTML('beforeend', markup);
 
 gallery.addEventListener('click', event => {
-  if (event.target === event.currentTarget) {
+  event.preventDefault();
+  if (event.target.nodeName !== 'IMG') {
     return;
   }
-  const imageUrl = event.target.getAttribute('data-source');
+  const imageUrl = event.target.dataset.source;
   const instance = basicLightbox.create(`
-        <img src="${imageUrl}" width="1112" height="640">
+       <img src="${imageUrl}" alt="${event.target.alt}">
     `);
   instance.show();
-  event.preventDefault();
 });
