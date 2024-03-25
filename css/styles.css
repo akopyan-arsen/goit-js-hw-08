@@ -48,8 +48,3 @@ a {
   overflow: hidden;
   object-fit: cover;
 }
-
-.basicLightbox__placeholder > img:first-child:last-child {
-  width: 1112px;
-  height: 640px;
-}

@@ -89,8 +89,23 @@ gallery.addEventListener('click', event => {
     return;
   }
   const imageUrl = event.target.dataset.source;
-  const instance = basicLightbox.create(`
-       <img src="${imageUrl}" alt="${event.target.alt}">
-    `);
+  const instance = basicLightbox.create(
+    `
+        <img src="${imageUrl}" width="1112" height="640">
+    `,
+    {
+      onShow: instance => {
+        document.addEventListener('keydown', handleKeyPress);
+      },
+      onClose: instance => {
+        document.removeEventListener('keydown', handleKeyPress);
+      },
+    }
+  );
   instance.show();
+  function handleKeyPress(event) {
+    if (event.key === 'Escape') {
+      instance.close();
+    }
+  }
 });
